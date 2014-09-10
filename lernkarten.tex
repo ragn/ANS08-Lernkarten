@@ -198,7 +198,7 @@
   \end{karte}
 
   \begin{karte}{Unterschied OLAP/TLTP}  
-    \includegraphics[width=0.9\textwidth]{img/diff_olap_oltp}
+    \includegraphics[width=0.9\textwidthg]{img/diff_olap_oltp}
   \end{karte}
 
   \begin{karte}{Anforderungen an OLAP}  
@@ -253,4 +253,58 @@
     \end{itemize}
   \end{karte}
 
+  \begin{karte}{Modellierung}    
+    Die \textbf{multidimensionale Modellierung} ist in der Lage die konzeptionellen Datenstrukturen in physische Datenbank-/Speicherstrukturen umzusetzen. Im Falle eine \textit{dünn besetzen Matrix} wird Speicherplatz vergeudet, da für nicht existente Werte gleich viel Speicher verbraucht wird, als wenn der Wert existiert.
+
+    Die \textbf{relationale Modellierung} setzt die mehrdimensionale Datenstruktur in einer relationalen Datenbankstruktur ab. Es wird dabei zwischen:
+
+    \begin{itemize}
+      \item Fakten (quantitative Kerndaten)
+      \item Dimension (beschreibende Daten, kann beliebig viele Ausprägungen haben)
+    \end{itemize}
+
+    unterschieden.
+  \end{karte}
+
+  \begin{karte}{Star-Schema}  
+    Für jede Dimension wird eine Tabelle eingerichtet. Die Dimensionstabellen sind nicht miteinander verknüpft, sondern stehen nur über die Faktentabelle miteinander in Beziehung. Der Primärschlüssel in der Faktentabelle setzt sich zusammen aus den Primärschlüsseln aller Dimensionstabellen.
+
+    Vorteil:
+    \begin{itemize}
+      \item einfaches, intuitive Datenmodell
+      \item benötigt nur wenige Join-Operationen
+      \item wenige Tabellen benötigt
+    \end{itemize}
+
+    Nachteil:
+    \begin{itemize}
+      \item durch die große Anzahl der Verknüpfungsmöglichkeiten
+kann es zu Performanceproblemen kommen
+    \end{itemize}
+    \includegraphics[height=0.45\paperheight]{img/star_schema}
+  \end{karte}
+
+  \begin{karte}{Snowflake-Schema}  
+    Dieses Schema ist einer Erweiterung des Star-Schemas und wird durch die Normalisierung entwickelt.
+
+    Vorteile:
+    \begin{itemize}
+      \item erleichtert die Aggregation
+      \item keine Redundanzen      
+    \end{itemize}
+
+    Nachteile
+
+    \begin{itemize}
+      \item höhere Anzahl JOINS
+      \item höhere Anzahl Tabellen
+      \item komplexere SQL-Abfragen
+    \end{itemize}
+
+    \includegraphics[height=.45\paperheight]{img/snowflake}
+  \end{karte}
+
+  \begin{karte}{Was ist Data-Mining?}
+    
+  \end{karte}
 \end{document}

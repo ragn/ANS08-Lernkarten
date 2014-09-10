@@ -1,0 +1,3 @@
+[submodule "lib/kartei"]
+	path = lib/kartei
+	url = https://github.com/kellertuer/Kartei

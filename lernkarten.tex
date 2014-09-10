@@ -141,8 +141,116 @@
     \end{itemize}
   \end{karte}  
 
-%  \begin{karte}{}
-%
-%  \end{karte}
+  \begin{karte}{Laden}
+    Es wird unterschieden zwischen:
+    \begin{itemize}  
+      \item Initialem Füllen aus den operativen Datenbanken
+      \item Zyklischer Aktualisierung, neue Werte werden ergänzt, alte archiviert
+    \end{itemize}
+
+    Wenn die Daten zyklisch übernommen werden kann dies als:
+
+    \begin{itemize}
+      \item Kompletter Abzug (einfach aber zeitaufwendig)
+      \item jeweilige Änderungen (geringe Datenmenge, aufwendig das Delta zu ermitteln, nur der letzte Stand wird ermittelt)
+      \item Auswahl protokollierter Datenbanktransaktionen (auch Änderungen innerhalb des Deltas erfasst werden)
+    \end{itemize}
+
+    geschehen.
+  \end{karte}
+
+  \begin{karte}{Metadaten}
+    Metadaten sind Daten über Daten und enthalten Hintergrundinformationen über die im DWH gespeicherten Werte. Sie geben Aufschluss über:
+    \begin{itemize}
+      \item Umfang der verfügbaren Daten
+      \item Datenstruktur und Beziehungen (Relationen)
+      \item Herkunft der operativen Daten
+      \item Speicherort im DWH
+      \item Formate
+      \item Zugriffsberechtigungen      
+    \end{itemize}
+
+    In der Metadatenbank wird festgehalten:
+
+    \begin{itemize}
+      \item Welche Daten woher kommen
+      \item Wie sie aufbereitet und verdichtet werden
+      \item Wo sie gespeichert werden
+      \item Welcher Anwender auf welche Daten Zugriff erhält
+    \end{itemize}
+  \end{karte}
+
+  \begin{karte}{Archivierung}  
+    Es wird zwischen der:
+
+    \begin{itemize}
+      \item Datenarchivierung (auslagern auf Offlinedatenträger nach Zeit)
+      \item Datensicherung (Dienen zur Wiederherstellung des DWH)
+    \end{itemize}
+
+    unterschieden.
+  \end{karte}
+
+  \begin{karte}{OLAP}  
+    Der Begriff steht für Online Analytical Processing und umfasst alle Formen der \textit{mehrdimensionalen Datenanalyse}. Im Focus stehen betriebswirtschaftliche Kennzahlen. Die Mehrdimensionalität wir durch s.g. \textit{Datenwürfel} veranschaulicht.
+
+    \includegraphics[height=.09\paperheight]{img/wuerfel}
+  \end{karte}
+
+  \begin{karte}{Unterschied OLAP/TLTP}  
+    \includegraphics[height=.09\paperheight]{img/diff_olap_oltp}
+  \end{karte}
+
+  \begin{karte}{Anforderungen an OLAP}  
+        
+    \begin{itemize}
+      \item Mehrdimensionale konzeptionelle Sicht auf die Daten (Zeit, Produktgruppe, Region, Person, usw.)
+      \item Transparenz (Anwender müssen keine technischen Details kennen)
+      \item Zugriffsmöglichkeiten (auf möglichst viele heterogene und interne/externe Datenquellen)
+      \item Stabile Antwortzeiten (möglichst schnell und vor allem gleichbleibend)
+      \item Client-/Server-Architektur
+      \item Gleichrangige Dimensionen
+      \item Dynamische Handhabung \"dünn besetzter\" Matrizen (effiziente Speicherung trotz Lücken)
+      \item Mehrbenutzerfähigkeit
+      \item Unbeschränkt dimensionsübergreifende Operationen
+      \item Intuitive Datenanalyse
+      \item Flexibles Berichtswesen (Dokumentation in FOrm von Berichten und Grafiken)
+      \item Unbegrenzte Anzahl von Dimensionen/Aggregationsstufen
+    \end{itemize}
+
+    \textbf{Kritik:} Die unscharfe Trennung zwischen fachlich-konzeptionellen Anforderungen und technischer Realisierung.
+
+    Alternativ \textbf{FASMI}:
+
+    \begin{itemize}
+      \item Fast (Antwortzeit max. 20s)
+      \item Analysis (Anwender ohne technisches Wissen müssen auswerten können)
+      \item Shared (Mehrbenutzer)
+      \item Multidimensional
+      \item Information (sämtliche benötigten Informationen können geliefert werden)      
+    \end{itemize}
+  \end{karte}
+
+  \begin{karte}{Mehrdimensionalität}  
+    Die Anzahl der Dimensionen lässt sich mit der Fakultät der Dimensionen berechnen:
+    2 Dim = 1 x 2 = 2 Sichten\\
+    3 Dim = 1 x 2 x 3 = 6 Sichten\\
+    4 Dim = 1 x 2 x 3 x 4 = 24 Sichten\\
+
+    Die verschiedenen Betrachtungsmöglichkeiten werden auch als \textbf{Slice and Dice} bezeichnet. \textit{Slice} bedeutet das Herausschneiden von Scheiben aus dem Würfel. \textit{Dice} bedeutet die Bildung von kleinen Würfeln aus dem Gesamtwürfel zur Einschränkung auf einen Wert bzw. Wertebereich.
+
+    Mittels \textbf{Drill down} ist es möglich von einer bestehenden Verdichtungsebene auf eine detaillierte Ebene zu wechseln. \textbf{Drill up} wechselt von einer Ebene auf eine verdichtertere Ebene. \textbf{Drill across} ermöglicht zu einem anderen Wert auf der selben Ebene zu wechseln.
+  \end{karte}
+
+  \begin{karte}{Wie können Daten verdichtet werden?}  
+    
+    Wie die Daten verdichtet werden können hängt unmittelbar vom Typ ab.
+
+    \begin{itemize}
+      \item \textbf{Additive Daten} lassen sich beliebig aufsummieren (Umsatz in Kombination mit Produkten und Regionen)
+      \item \textbf{Semiadditive Daten} lassen sich nicht über alle Dimensionen aufaddieren (z.B. bei Zeiträumen und Lagerbeständen)
+      \item \textbf{Nichtadditive Daten} lassten keine sinnvolle Aufsummierung zu (Anteilswerte)
+    \end{itemize}
+  \end{karte}
 
 \end{document}
